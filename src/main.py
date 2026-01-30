@@ -78,7 +78,11 @@ def publish(
                     assert hardware_info is not None
                     publish_cell_voltages(hardware_info, ev)
 
-        poll_device(mac, submit_event, lambda: cancelled.is_set())
+        while not cancelled.is_set():
+            try:
+                poll_device(mac, submit_event, lambda: cancelled.is_set())
+            except Exception:
+                logger.error("Worker failed, retrying...", exc_info=True)
 
     # Host our metrics server
     logger.info("Starting server at http://%s:%d/metrics", host, port)
