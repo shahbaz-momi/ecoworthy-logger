@@ -49,3 +49,9 @@ uv run src/main.py publish [-p port] [-h host] -m AA:BB:CC:DD:EE:FF [-m ...]
 ```
 
 This starts a Prometheus metrics server which can be accessed via http://host:port/metrics.
+
+### Grafana
+
+With this, it is quite trivial to setup a nice dashboard:
+![Grafana Dashboard 1](https://raw.githubusercontent.com/shahbaz-momi/ecoworthy-logger/main/media/grafana1.png)
+![Grafana Dashboard 2](https://raw.githubusercontent.com/shahbaz-momi/ecoworthy-logger/main/media/grafana2.png)
