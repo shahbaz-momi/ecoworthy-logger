@@ -1,7 +1,7 @@
 [project]
-name = "eco-sense"
-version = "0.1.0"
-description = "Add your description here"
+name = "ecoworthy-logger"
+version = "1.0.0"
+description = "Utility to scrape battery data off of Ecoworthy batteries, or any compatible JBD BMS"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
