@@ -6,7 +6,7 @@ import attrs
 from bluepy.btle import Peripheral, DefaultDelegate, Characteristic, Service
 from construct import Array, Byte, Bytes, ExprAdapter, PascalString, Short, Struct
 
-logger = logging.getLogger("eco-sense")
+logger = logging.getLogger("ecoworthy-lib")
 
 
 class JbdAbi:
@@ -129,7 +129,7 @@ class JbdDelegate(DefaultDelegate):
                     logger.debug("Got object %s", obj)
 
                     event = JbdCellVoltages(
-                        cells_v=[mv / 100.0 for mv in obj["cells_mv"]]
+                        cells_v=[mv / 1000.0 for mv in obj["cells_mv"]]
                     )
 
                     self._on_event(event)
@@ -184,7 +184,10 @@ class JbdDelegate(DefaultDelegate):
                     logger.info("Failed to parse basic info", exc_info=True)
 
             case _:
-                logger.error("Received garbage data: %s", hex_encode(data)[0].decode())
+                if len(data) != 0:
+                    logger.error(
+                        "Received garbage data: %s", hex_encode(data)[0].decode()
+                    )
 
 
 def poll_device(
